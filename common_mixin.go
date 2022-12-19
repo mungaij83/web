@@ -749,15 +749,15 @@ func commonMixin_ReadGroup(rs m.CommonMixinSet, params webtypes.ReadGroupParams)
 	}
 	rSet = rSet.GroupBy(effGB[0])
 	// We don't want aggregates as CommonMixin Aggregate, so we switch to RecordCollection
-	aggregates := rSet.Call("Aggregates", fields).([]models.GroupAggregateRow)
+	aggregates := rSet.Call("Aggregates", fields).([]fields.GroupAggregateRow)
 	res := make([]models.FieldMap, len(aggregates))
 	fInfos := rSet.FieldsGet(models.FieldsGetArgs{})
 	for i, ag := range aggregates {
 		line := rs.AddNamesToRelations(ag.Values, fInfos)
-		line.Underlying().Set(models.NewFieldName(countFieldName, countFieldName), ag.Count)
-		line.Underlying().Set(models.NewFieldName("__domain", "__domain"), ag.Condition.Serialize())
+		line.Underlying().Set(fields.NewFieldName(countFieldName, countFieldName), ag.Count)
+		line.Underlying().Set(fields.NewFieldName("__domain", "__domain"), ag.Condition.Serialize())
 		if len(gb) > 1 {
-			line.Underlying().Set(models.NewFieldName("__context", "__context"), models.FieldMap{"group_by": gb[1:].JSON()})
+			line.Underlying().Set(fields.NewFieldName("__context", "__context"), models.FieldMap{"group_by": gb[1:].JSON()})
 		}
 		res[i] = line.Underlying().FieldMap
 	}

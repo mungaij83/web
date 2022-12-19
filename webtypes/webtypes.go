@@ -6,7 +6,6 @@ package webtypes
 import (
 	"encoding/json"
 	"fmt"
-
 	"github.com/hexya-addons/web/domains"
 	"github.com/hexya-erp/hexya/src/actions"
 	"github.com/hexya-erp/hexya/src/models"

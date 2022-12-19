@@ -5,7 +5,6 @@ package controllers
 
 import (
 	"fmt"
-
 	"github.com/hexya-addons/web/domains"
 	"github.com/hexya-addons/web/odooproxy"
 	"github.com/hexya-addons/web/webtypes"
